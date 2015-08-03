@@ -1,6 +1,6 @@
 var Lorenz = require('./lorenz');
 
-var lor = new Lorenz(0,0,0);
+var lor = new Lorenz(10,10,10);
 
 for (var i=0; i< 10; ++i) {
     var point = lor.getNextPoint();
