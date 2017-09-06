@@ -1,7 +1,7 @@
 
 var setup = function() {
-    yCenter = 300;
-    var xCenter = 400;
+    yCenter = 250;
+    var xCenter = 300;
     var lineWidth   = 1;
     context.beginPath();
     context.lineWidth = lineWidth;
@@ -13,15 +13,19 @@ var setup = function() {
 //        console.log(x);
         context.beginPath();
 
-
+//        console.log("x = " + x.length);
         x.forEach( function (xnow, index, array) {
-//            console.log(z[index]);
+//            console.log("index = " + x[index]);
+            //            console.log(z[index]);
+//            if (z[index] > 100 || z[index] < -100){
+//                console.log( "x = " + x[index]);
+//            }
             context.strokeStyle = getZcolor(z[index]);
-            context.lineTo(xCenter +10 * xnow, yCenter + 10 * y[index]);
+            context.lineTo(xCenter +(10 * x[index]), yCenter + (10 * y[index]));
         });
         context.stroke();
-    }
-}
+    };
+};
 
 
 
