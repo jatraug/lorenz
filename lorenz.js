@@ -6,40 +6,40 @@
 
 
 var Lorenz = function (Xinit, Yinit, Zinit) {
-this.x = Xinit;
-this.y = Yinit;
-this.z = Zinit;
-this.rho = 28;
-this.sigma = 10;
-this.beta = 8/3;
-this.dt = 0.01;
+    this.x = Xinit;
+    this.y = Yinit;
+    this.z = Zinit;
+    this.rho = 28;
+    this.sigma = 10;
+    this.beta = 8/3;
+    this.dt = 0.01;
 
-this.getDx = function() {
-    var answer =  ( this.sigma * (this.nexty - this.nextx));
-    //console.log ("dx/dt = " + answer);
-    return this.dt * answer;
+    this.getDx = function () {
+        var answer =  ( this.sigma * (this.nexty - this.nextx));
+        //console.log ("dx/dt = " + answer);
+        return this.dt * answer;
+    };
+    this.getDy = function () {
+        var answer = ( this.nextx * (this.rho - this.nextz) -this.nexty);
+        //    var answer = this.rho * (this.x - this.y - (this.x * this.z)); 
+        //    console.log ("dy/dt = " + answer);
+        return this.dt * answer;
+
+    };
+    this.getDz = function () {
+        var answer =  (this.nextx * this.nexty - (this.beta  * this.nextz));
+        //    console.log ("dz/dt = " + answer);
+        return this.dt * answer;
+
+    };
+
 };
-this.getDy= function() {
-   var answer = ( this.nextx * (this.rho - this.nextz) -this.nexty);
-    //    var answer = this.rho * (this.x - this.y - (this.x * this.z)); 
-//    console.log ("dy/dt = " + answer);
-    return this.dt * answer;
 
-};
-this.getDz = function() {
-    var answer =  (this.nextx * this.nexty - (this.beta  * this.nextz));
-//    console.log ("dz/dt = " + answer);
-    return this.dt * answer;
-
-};
-
-};
-
-Lorenz.prototype.getNextPoint = function() {
+Lorenz.prototype.getNextPoint = function () {
     this.nextx = this.x;
     this.nexty = this.y;
     this.nextz = this.z;
-   // console.log("this.nextx = " + this.nextx + " this.nexty = " + this.nexty + " this.nextz = " + this.nextz);
+    // console.log("this.nextx = " + this.nextx + " this.nexty = " + this.nexty + " this.nextz = " + this.nextz);
 
     this.x += this.getDx();
     this.y += this.getDy();
@@ -53,7 +53,7 @@ Lorenz.prototype.getNextPoint = function() {
 
 
 function start() {
-    var lor = new Lorenz(1,1,1);
+    var lor = new Lorenz(1,1,3);
     var draw = setup();
     setInterval(doIt, 100, lor, draw);
 
@@ -63,13 +63,13 @@ function doIt(lor, draw) {
     var x =[];
     var y =[];
     var z = [];
-    for (var i=0; i< 10; ++i) {
+    for (var i=0; i< 50; ++i) {
         var point = lor.getNextPoint();
         x.push(point[0]);
         y.push(point[1]);
         z.push(point[2]);
-       
-       // console.log ('point: x = ' + point[0] + ' y= ' + point[1] + ' z= ' + point[2]);
+        
+        // console.log ('point: x = ' + point[0] + ' y= ' + point[1] + ' z= ' + point[2]);
     }
     draw(x,y,z);
 }
