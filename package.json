@@ -1,0 +1,19 @@
+{
+  "name": "lorenz",
+  "version": "1.0.0",
+  "description": "Display Lorenz strange attractor",
+  "main": "lorenz.js",
+  "dependencies": {
+    "express": "^4.15.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/users/jimt/Dropbox/Git/lorenz.git/"
+  },
+  "author": "Jim Traugott",
+  "license": "MIT"
+}
