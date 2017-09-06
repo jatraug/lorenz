@@ -4,4 +4,4 @@
 default : test
 
 test :
-	node test.js
+	jslint *.js
