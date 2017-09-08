@@ -56,7 +56,6 @@ function start() {
     var lor = new Lorenz(1,1,3);
     var draw = setup();
     setInterval(doIt, 100, lor, draw);
-
 }
 
 function doIt(lor, draw) {

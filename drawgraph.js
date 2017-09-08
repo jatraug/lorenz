@@ -6,12 +6,19 @@ var setup = function() {
     context.beginPath();
     context.lineWidth = lineWidth;
     context.strokeStyle = '#1D8DB3';
-    context.moveTo(xCenter, yCenter);
+    var xMove = xCenter;
+    var yMove = yCenter;
+    context.moveTo(xMove, yMove);
 
 
     return  function(x, y, z) {
 //        console.log(x);
         context.beginPath();
+        context.moveTo(xMove, yMove);
+        xMove = Math.floor(xCenter +(10 * x[x.length -1]));
+//        x[x.length -1];
+        yMove =Math.floor(yCenter + (10 * y[y.length -1]));
+// y[y.length -1];
 
 //        console.log("x = " + x.length);
         x.forEach( function (xnow, index, array) {
@@ -21,7 +28,7 @@ var setup = function() {
 //                console.log( "x = " + x[index]);
 //            }
             context.strokeStyle = getZcolor(z[index]);
-            context.lineTo(xCenter +(10 * x[index]), yCenter + (10 * y[index]));
+            context.lineTo(Math.floor(xCenter +(10 * x[index])), Math.floor(yCenter + (10 * y[index])));
         });
         context.stroke();
     };
