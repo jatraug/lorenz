@@ -14,19 +14,19 @@ var Lorenz = function (Xinit, Yinit, Zinit) {
     this.beta = 8/3;
     this.scaler = 0.01;
 
-    this.getDx = function () {
+    this.getDxDt = function () {
         var answer =  ( this.sigma * (this.nexty - this.nextx));
         //console.log ("dx/dt = " + answer);
         return this.scaler * answer;
     };
-    this.getDy = function () {
+    this.getDyDt = function () {
         var answer = ( this.nextx * (this.rho - this.nextz) -this.nexty);
         //    var answer = this.rho * (this.x - this.y - (this.x * this.z)); 
         //    console.log ("dy/dt = " + answer);
         return this.scaler * answer;
 
     };
-    this.getDz = function () {
+    this.getDzDt = function () {
         var answer =  (this.nextx * this.nexty - (this.beta  * this.nextz));
         //    console.log ("dz/dt = " + answer);
         return this.scaler * answer;
@@ -41,9 +41,9 @@ Lorenz.prototype.getNextPoint = function () {
     this.nextz = this.z;
     // console.log("this.nextx = " + this.nextx + " this.nexty = " + this.nexty + " this.nextz = " + this.nextz);
 
-    this.x += this.getDx();
-    this.y += this.getDy();
-    this.z += this.getDz();
+    this.x += this.getDxDt();
+    this.y += this.getDyDt();
+    this.z += this.getDzDt();
     //console.log("this.nextx = " + this.nextx + " this.nexty = " + this.nexty + " this.nextz = " + this.nextz);
     return[this.nextx, this.nexty, this.nextz];
 };
