@@ -23,36 +23,43 @@
 <script src ="./lorenz.js"></script>
 
 <script>
-  var elem = document.getElementById('myCanvas');
-  var interval = -1;
-  
+    var elem = document.getElementById('myCanvas');
+
 // Check the element is in the DOM and the browser supports canvas
 if(elem.getContext) {
-// Initaliase a 2-dimensional drawing context
-var context = elem.getContext('2d');
-  //Canvas commands go here
-//  console.log("FOOROO");
-  start();
-  }
+    // Initaliase a 2-dimensional drawing context
+    var context = elem.getContext('2d');
+    //Canvas commands go here
+    start();
+}
 
+// filled in later
+function endInterval() {
+};
 
+// call startInterval just like setInterval,
+function startInterval(a,b,c,d) {
+    var inteval;
+    interval = setInterval(a,b,c,d);
+    return function() {
+        clearInterval(interval);
+    };
+}    
+    
+function start() {
 
-
-  
-  function start() {
-  if(interval >0) {
-       clearInterval(interval);
-  }
+    endInterval();
+    
     context.clearRect(0,0,myCanvas.width, myCanvas.height);
     var lor = new Lorenz(1,1,3);
     var draw = setup();
-  interval = setInterval(doIt, 100, lor, draw);
+    endInterval = startInterval(doIt, 100, lor, draw);
 }
 
                  </script>
 <!-- Insert Here -->
 <!-- <script src="./jquery.js"></script> -->
- <!-- <button formaction='/riverdata', formmethod='get'>Lorenz</button>  -->
+
 
 </body></html>
 
