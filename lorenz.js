@@ -6,9 +6,9 @@
 
 
 var Lorenz = function (Xinit, Yinit, Zinit) {
-    this.x = Xinit;
-    this.y = Yinit;
-    this.z = Zinit;
+    this.x = this.nextx = Xinit;
+    this.y = this.nexty = Yinit;
+    this.z = this.nexz = Zinit;
     this.rho = 28;
     this.sigma = 10;
     this.beta = 8/3;
@@ -52,17 +52,13 @@ Lorenz.prototype.getNextPoint = function () {
 //module.exports = Lorenz;
 
 
-function start() {
-    var lor = new Lorenz(1,1,3);
-    var draw = setup();
-    setInterval(doIt, 100, lor, draw);
-}
+
 
 function doIt(lor, draw) {
     var x =[];
     var y =[];
     var z = [];
-    for (var i=0; i< 50; ++i) {
+    for (var i=0; i< 20; ++i) {
         var point = lor.getNextPoint();
         x.push(point[0]);
         y.push(point[1]);
