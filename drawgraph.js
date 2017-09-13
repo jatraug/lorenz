@@ -1,6 +1,6 @@
 
 var setup = function() {
-    yCenter = 250;
+    var yCenter = 250;
     var xCenter = 300;
     var lineWidth   = 1;
     context.beginPath();
@@ -8,32 +8,50 @@ var setup = function() {
     context.strokeStyle = '#1D8DB3';
     var xMove = xCenter;
     var yMove = yCenter;
-    context.moveTo(xMove, yMove);
+    //context.moveTo(xMove, yMove);
 
 
     return  function(x, y, z) {
-//        console.log(x);
+
         context.beginPath();
         context.moveTo(xMove, yMove);
-        xMove = Math.floor(xCenter +(10 * x[x.length -1]));
-//        x[x.length -1];
-        yMove =Math.floor(yCenter + (10 * y[y.length -1]));
-// y[y.length -1];
 
-//        console.log("x = " + x.length);
+
+
         x.forEach( function (xnow, index, array) {
-//            console.log("index = " + x[index]);
-            //            console.log(z[index]);
-//            if (z[index] > 100 || z[index] < -100){
-//                console.log( "x = " + x[index]);
-//            }
+
             context.strokeStyle = getZcolor(z[index]);
-            context.lineTo(Math.floor(xCenter +(10 * x[index])), Math.floor(yCenter + (10 * y[index])));
+           // xMove = Math.floor(xCenter +(10 * x[x.length -1]));
+            
+            // yMove =Math.floor(yCenter + (10 * y[y.length -1]));
+            xMove = Math.floor(xCenter + (10 * x[index]));
+            yMove = Math.floor(yCenter + (10 * getYorZ(y[index], z[index])));
+            
+            context.lineTo(xMove, yMove); //Math.floor(xCenter +(10 * x[index])), Math.floor(yCenter + (10 * y[index])));
         });
         context.stroke();
     };
 };
 
+var getYorZ = function(y,z) {
+    return y;
+};
+
+    
+//DEtermine if this should be x-y or x-z
+function doXYZ(isYorZ){
+    if (isYorZ ===1){
+        getYorZ = function(y,z) {
+            return y;
+        };
+    }else {
+        getYorZ = function(y,z) {
+            return z;
+        };
+    };
+    start();
+    start();
+}
 
 
  

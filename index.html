@@ -6,7 +6,9 @@
   </head>
 
   <body>
-
+    <button type="button" onclick=doXYZ(1)>X-Y</button>
+    <button type="button" onclick=doXYZ(2)>X-Z</button>
+ 
     <canvas id="myCanvas" width="800" height="800">
          Your browser does not support Canvas
     </canvas>
@@ -22,7 +24,8 @@
 
 <script>
   var elem = document.getElementById('myCanvas');
-
+  var interval = -1;
+  
 // Check the element is in the DOM and the browser supports canvas
 if(elem.getContext) {
 // Initaliase a 2-dimensional drawing context
@@ -31,6 +34,20 @@ var context = elem.getContext('2d');
 //  console.log("FOOROO");
   start();
   }
+
+
+
+
+  
+  function start() {
+  if(interval >0) {
+       clearInterval(interval);
+  }
+    context.clearRect(0,0,myCanvas.width, myCanvas.height);
+    var lor = new Lorenz(1,1,3);
+    var draw = setup();
+  interval = setInterval(doIt, 100, lor, draw);
+}
 
                  </script>
 <!-- Insert Here -->

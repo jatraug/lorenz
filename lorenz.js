@@ -6,30 +6,30 @@
 
 
 var Lorenz = function (Xinit, Yinit, Zinit) {
-    this.x = Xinit;
-    this.y = Yinit;
-    this.z = Zinit;
+    this.x = this.nextx = Xinit;
+    this.y = this.nexty = Yinit;
+    this.z = this.nexz = Zinit;
     this.rho = 28;
     this.sigma = 10;
     this.beta = 8/3;
-    this.dt = 0.01;
+    this.scaler = 0.01;
 
     this.getDx = function () {
         var answer =  ( this.sigma * (this.nexty - this.nextx));
         //console.log ("dx/dt = " + answer);
-        return this.dt * answer;
+        return this.scaler * answer;
     };
     this.getDy = function () {
         var answer = ( this.nextx * (this.rho - this.nextz) -this.nexty);
         //    var answer = this.rho * (this.x - this.y - (this.x * this.z)); 
         //    console.log ("dy/dt = " + answer);
-        return this.dt * answer;
+        return this.scaler * answer;
 
     };
     this.getDz = function () {
         var answer =  (this.nextx * this.nexty - (this.beta  * this.nextz));
         //    console.log ("dz/dt = " + answer);
-        return this.dt * answer;
+        return this.scaler * answer;
 
     };
 
@@ -52,17 +52,13 @@ Lorenz.prototype.getNextPoint = function () {
 //module.exports = Lorenz;
 
 
-function start() {
-    var lor = new Lorenz(1,1,3);
-    var draw = setup();
-    setInterval(doIt, 100, lor, draw);
-}
+
 
 function doIt(lor, draw) {
     var x =[];
     var y =[];
     var z = [];
-    for (var i=0; i< 50; ++i) {
+    for (var i=0; i< 20; ++i) {
         var point = lor.getNextPoint();
         x.push(point[0]);
         y.push(point[1]);
