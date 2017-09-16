@@ -1,7 +1,8 @@
 
 var setup = function() {
-    var yCenter = 250;
-    var xCenter = 300;
+    var center = getCenter();
+    var yCenter = center.Y;
+    var xCenter = center.X;
     var lineWidth   = 1;
     context.beginPath();
     context.lineWidth = lineWidth;
@@ -9,6 +10,7 @@ var setup = function() {
     var xMove = xCenter;
     var yMove = yCenter;
     //context.moveTo(xMove, yMove);
+
 
 
     return  function(x, y, z) {
@@ -42,15 +44,19 @@ var getYorZ = function(y,z) {
 function doXYZ(isYorZ){
     if (isYorZ ===1){
         getYorZ = function(y,z) {
+
             return y;
         };
+        getCenter = getXYcenter;
     }else {
         getYorZ = function(y,z) {
+
             return z;
         };
+        getCenter = getXZcenter; 
     };
     start();
-    start();
+
 }
 
 
@@ -63,4 +69,18 @@ function getZcolor(z) {
     }
 
     return'#0000ff';
+}
+
+function getCenter()  {
+    return getXYcenter();
+
+}
+
+
+function getXYcenter() {
+    return({'X': 300, 'Y': 300});
+}
+
+function getXZcenter() {
+    return({'X': 300, 'Y': 100});
 }
